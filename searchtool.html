@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body bgcolor="#f8f8f8">
+    <div id = header>
+        <ul>
+            <li><a href="index.html">Home</a> </li>
+            <li><a href="Kontakt.html">Contact</a></li>
+            <li><a href="Description.html">README</a></li>
+        </ul>
+    </id>
+    </div>
+    <div id="main2">
+
+        <script>
+            function execute(){
+                let data = getvar();
+                //var jsonread = Get(data);
+                let json_obj = JSON.parse(Get(data));
+                console.log(json_obj);
+            }
+            function getvar(){
+                let APIKey = document.getElementById("CredentialsGoogle").value;
+                let nameoffile = document.getElementById("nameoffile").value;
+                let search = document.getElementById("search").value;
+                let digit = search.replace(' ', '%20') //?
+                let find_places= "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+digit+"&key="+APIKey;
+                console.log(find_places);
+                document.getElementById("google").src = find_places;
+                return find_places;
+            } 
+            function Get(Url){
+                let Httpreq = new XMLHttpRequest(); // a new request
+                Httpreq.open("GET",Url,false); //Laut Documentation soll GET Befehl immer funktionieren ohne CORS-Error, aber es geht ne. Dann gabs es einen "Acess Origin blah blah "*"" header, aber ka wo ich das hinpflanzen muss
+                Httpreq.send(null);
+                return Httpreq.responseText;  
+            }
+            
+            // function search(data){
+            //     let table = [["Name","Adresse","Telefon","Bewertung","Website"]]
+            //     let table2 = []
+            //     let data_1 = JSON.parse(data)
+            //     console.log(data)
+            // }
+        </script>
+
+        <script async defer id="google">//soll ich laut google API Documentation machen, ka was das Ziel dahinter ist, die source wird aus Befehl "getvar" geholt</script> 
+
+
+        <a>GoogleAPI</a>
+        <input type="text" id="CredentialsGoogle">
+        <br />
+        <a>Filename</a>
+        <input type="text" id="nameoffile">
+        <br />
+        <a>Search</a>
+        <input type="text" id="search">
+        <br/>
+        <button type="button" onclick="execute()">Search</button>
+     </div>
+</body>
+</html>
+
